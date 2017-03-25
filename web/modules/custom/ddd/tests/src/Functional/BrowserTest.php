@@ -23,16 +23,16 @@ class BrowserTest extends BrowserTestBase {
 
     $this->drupalCreateContentType(['type' => 'page', 'name' => 'Basic page']);
     $this->user = $this->drupalCreateUser(['edit own page content', 'create page content']);
-    $this->drupalPlaceBlock( 'local_tasks_block');
+    $this->drupalPlaceBlock('local_tasks_block');
   }
 
   /**
    * {@inheritdoc}
    */
-  function testNodeCreate() {
+  public function testNodeCreate() {
     $this->drupalLogin($this->user);
     $title = $this->randomString();
-    $body = $this->randomString( 32);
+    $body = $this->randomString(32);
     $edit = [
       'Title' => $title,
       'Body' => $body,
@@ -49,7 +49,7 @@ class BrowserTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  function _testDrupalGet() {
+  public function _testDrupalGet() {
     $this->drupalGet('user/register');
     $this->assertSession()->pageTextContains('Create new account');
     $this->assertSession()->fieldExists('Email address');
