@@ -1,0 +1,4 @@
+name: Drupal dev Days Testing
+type: module
+package: Bobos moduler
+core: 8.x
