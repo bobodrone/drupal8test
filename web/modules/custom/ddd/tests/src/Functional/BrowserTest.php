@@ -57,4 +57,5 @@ class BrowserTest extends BrowserTestBase {
     $this->assertSession()->buttonExists('Create new account');
     $this->assertSession()->pageTextNotContains('Joomla');
   }
+
 }
