@@ -49,7 +49,7 @@ class BrowserTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function _testDrupalGet() {
+  public function testDrupalGet() {
     $this->drupalGet('user/register');
     $this->assertSession()->pageTextContains('Create new account');
     $this->assertSession()->fieldExists('Email address');
