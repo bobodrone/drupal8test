@@ -21,12 +21,14 @@ class BrowserTest extends BrowserTestBase {
   protected function setUp() {
     parent::setUp();
 
-    $this->drupalCreateContentType([ 'type' => 'page', 'name' => 'Basic page']);
-    $this->user = $this->drupalCreateUser([ 'edit own page content', 'create page content']);
+    $this->drupalCreateContentType(['type' => 'page', 'name' => 'Basic page']);
+    $this->user = $this->drupalCreateUser(['edit own page content', 'create page content']);
     $this->drupalPlaceBlock( 'local_tasks_block');
   }
 
-
+  /**
+   * {@inheritdoc}
+   */
   function testNodeCreate() {
     $this->drupalLogin($this->user);
     $title = $this->randomString();
@@ -35,22 +37,24 @@ class BrowserTest extends BrowserTestBase {
       'Title' => $title,
       'Body' => $body,
     ];
-    $this->drupalPostForm( 'node/add/page', $edit, t('Save'));
+    $this->drupalPostForm('node/add/page', $edit, t('Save'));
 
-    // Test that the title is the same
+    // Test that the title is the same.
     $node = $this->drupalGetNodeByTitle($title);
     $this->assertTrue($node);
     $this->assertEquals($title, $node->getTitle());
     $this->assertEquals($body, $node->body->value);
   }
 
-
+  /**
+   * {@inheritdoc}
+   */
   function _testDrupalGet() {
     $this->drupalGet('user/register');
-    $this->assertSession()->pageTextContains( 'Create new account');
-    $this->assertSession()->fieldExists( 'Email address');
-    $this->assertSession()->fieldExists( 'Username');
-    $this->assertSession()->buttonExists( 'Create new account');
-    $this->assertSession()->pageTextNotContains( 'Joomla');
+    $this->assertSession()->pageTextContains('Create new account');
+    $this->assertSession()->fieldExists('Email address');
+    $this->assertSession()->fieldExists('Username');
+    $this->assertSession()->buttonExists('Create new account');
+    $this->assertSession()->pageTextNotContains('Joomla');
   }
 }
